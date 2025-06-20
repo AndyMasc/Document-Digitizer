@@ -2,16 +2,26 @@
 <html lang="en">
 
 <head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+    </style>
+
     <meta charset="UTF-8">
     <title>Image uploader</title>
-    <link rel="stylesheet" href="./static/main.css">
+    <link rel="stylesheet" href="/static/main.css">
 </head>
 
 <body>
-    <h1> Convert your images to text </h1>
-    <form>
-        <label for="fileUpload">Upload an image file <br></label>
-        <input type="file" id="fileUpload" accept="image/png, image/jpeg" />
+
+<h1> Convert <span style="color:brown">Your</span> Handwriting to Text </h1>
+<h2>
+    1. Upload an image file of your handwriting or other text.<br>
+    2. Click convert<br>
+    3. Done! You can download a PDF file version now.
+</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="upload" id="fileUpload" accept="image/png, image/jpeg" /><br>
+        <input type="submit" value="Convert">
     </form>
 </body>
 
