@@ -1,37 +1,38 @@
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
-import pytesseract
+from flask_dropzone import Dropzone
+import pytesseract, cv2, os
 pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
-import cv2
-import os
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    extracted_text = ''
+    output = ''
     if request.method == 'POST':
-        file = request.files['upload']
+        file = request.files.get('file')
         filename = secure_filename(file.filename)
         global target
         target = os.path.join('UPLOAD_FOLDER', filename)
+        app.config['UPLOAD_FOLDER'] = target
         file.save(target)
-        convertImage()
-        with open('textFile.txt', 'r') as output:
-            extracted_text = output.read()
-        os.remove('textFile.txt')
-    return render_template('index.html', text=extracted_text)
+    return render_template('index.html', text=output)
 
-def convertImage():
+@app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded.
+                               # To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
+def showOutputText():
+    outputText = convertImageToText()
+    return render_template('index.html', text=outputText)
+
+def convertImageToText():
     global target
     image = cv2.imread(target)
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     text = pytesseract.image_to_string(image)
     os.remove(target)
+    return text
 
-    with open('textFile.txt', 'w') as textFile:
-        textFile.write(text)
-
+dropzone = Dropzone(app)
 if __name__ == '__main__':
     target = ''
     app.run(debug=True)

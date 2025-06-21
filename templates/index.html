@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+        <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 
-<head>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
-    </style>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
+        </style>
 
-    <meta charset="UTF-8">
-    <title> Image scanner </title>
-    <link rel="stylesheet" href="/static/main.css">
-</head>
+        <meta charset="UTF-8">
+        <title> Image scanner </title>
+        <link rel="stylesheet" href="/static/main.css">
+    </head>
+    <body>
 
-<body>
+    <h1> <span style="font-family:Outfit;"> Upload Your Handwriting<br> to Make it a Document </span> </h1>
+    <h2>
+        For best results, make sure your writing is on a blank, unruled white page.
+    </h2>
 
-<h1> Convert <span style="color:brown">Your</span> Handwriting to Text </h1>
-<h2>
-    1. Upload an image file (jpg or png) of your handwriting or other text.<br>
-    2. Click convert<br>
-    3. Done! You can download a PDF file version now.<br>
-    For best results, make sure your writing is on a blank, unruled white page.
-</h2>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <input type="file" name="upload" id="fileUpload" accept="image/png, image/jpeg" /><br>
-        <input type="submit" value="Convert">
-    </form>
+    <form action="/" method="POST" class="dropzone" id="drop-it-like-its-hot"></form>
+    <a href="{{ url_for('showOutputText') }}"> Click here to convert </a>
 
-    {% if text %}
-        <h2>Output text:</h2><br>
-        <div class="output-box">{{ text }}</div>
-    {% endif %}
-</body>
+        {% if text %}
+            <h2>Output text:</h2><br>
+            <div class="output-box">{{ text }}</div>
+        {% endif %}
+    </body>
 
+    <script>
+      Dropzone.discover();
+    </script>
 </html>
