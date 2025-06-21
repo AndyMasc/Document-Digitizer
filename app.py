@@ -1,14 +1,32 @@
-from bottle import route, run, template, view, static_file
-from TextConverter import *
+from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
+import pytesseract
+pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
+import cv2
+import os
 
-pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'  # for Apple Silicon
+app = Flask(__name__)
 
-@route('/static/<filename>')
-def server_static(filename):
-    return static_file(filename, root='./static')
-
-@route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return template('Homepage')
+    if request.method == 'POST':
+        file = request.files['upload']
+        filename = secure_filename(file.filename)
+        global target
+        target = os.path.join('UPLOAD_FOLDER', filename)
+        file.save(target)
+        return redirect(url_for('convertImage'))
+    return render_template('index.html')
 
-run(host='localhost', port=8080, debug=True, reloader=True)
+@app.route('/ImageConversion')
+def convertImage():
+    global target
+    image = cv2.imread(target)
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    text = pytesseract.image_to_string(image)
+    os.remove(target)
+    return f"Extracted text:<br><pre>{text}</pre>"
+
+if __name__ == '__main__':
+    target = ''
+    app.run(debug=True)
