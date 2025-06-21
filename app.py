@@ -9,23 +9,28 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    extracted_text = ''
     if request.method == 'POST':
         file = request.files['upload']
         filename = secure_filename(file.filename)
         global target
         target = os.path.join('UPLOAD_FOLDER', filename)
         file.save(target)
-        return redirect(url_for('convertImage'))
-    return render_template('index.html')
+        convertImage()
+        with open('textFile.txt', 'r') as output:
+            extracted_text = output.read()
+        os.remove('textFile.txt')
+    return render_template('index.html', text=extracted_text)
 
-@app.route('/ImageConversion')
 def convertImage():
     global target
     image = cv2.imread(target)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     text = pytesseract.image_to_string(image)
     os.remove(target)
-    return f"Extracted text:<br><pre>{text}</pre>"
+
+    with open('textFile.txt', 'w') as textFile:
+        textFile.write(text)
 
 if __name__ == '__main__':
     target = ''

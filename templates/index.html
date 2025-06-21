@@ -15,14 +15,20 @@
 
 <h1> Convert <span style="color:brown">Your</span> Handwriting to Text </h1>
 <h2>
-    1. Upload an image file of your handwriting or other text.<br>
+    1. Upload an image file (jpg or png) of your handwriting or other text.<br>
     2. Click convert<br>
-    3. Done! You can download a PDF file version now.
+    3. Done! You can download a PDF file version now.<br>
+    For best results, make sure your writing is on a blank, unruled white page.
 </h2>
     <form action="/" method="post" enctype="multipart/form-data">
         <input type="file" name="upload" id="fileUpload" accept="image/png, image/jpeg" /><br>
         <input type="submit" value="Convert">
     </form>
+
+    {% if text %}
+        <h2>Output text:</h2><br>
+        <div class="output-box">{{ text }}</div>
+    {% endif %}
 </body>
 
 </html>
