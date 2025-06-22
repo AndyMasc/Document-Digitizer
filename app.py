@@ -18,8 +18,7 @@ def index():
         file.save(target)
     return render_template('index.html', text=output)
 
-@app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded.
-                               # To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
+@app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
     outputText = convertImageToText()
     return render_template('index.html', text=outputText)

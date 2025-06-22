@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
-        <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+        <script src= "https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"> </script>
+        <link href= "https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel= "stylesheet" type= "text/css"/>
 
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
         </style>
 
         <meta charset="UTF-8">
@@ -14,22 +14,24 @@
         <link rel="stylesheet" href="/static/main.css">
     </head>
     <body>
+    <h1> Digitize Your Documents </h1>
 
-    <h1> <span style="font-family:Outfit;"> Upload Your Handwriting<br> to Make it a Document </span> </h1>
-    <h2>
-        For best results, make sure your writing is on a blank, unruled white page.
-    </h2>
+    <form action = "/" class = "dropzone" id = "drop-it-like-its-hot">
+        <img src = "/static/scannerIMG.png" alt = "scanner">
+        <div class="dz-message" data-dz-message> <span> Drop your document onto the scanner, or click this to choose </span> </div>
+    </form>
 
-    <form action="/" method="POST" class="dropzone" id="drop-it-like-its-hot"></form>
-    <a href="{{ url_for('showOutputText') }}"> Click here to convert </a>
+    <div class="PageLinks">
+        <a href="{{ url_for('showOutputText') }}"> Click here to convert </a>
+    </div>
 
-        {% if text %}
-            <h2>Output text:</h2><br>
-            <div class="output-box">{{ text }}</div>
-        {% endif %}
+    {% if text %}
+        <h2>Output text:</h2><br>
+        <div class = "output-box">{{ text }}</div>
+    {% endif %}
     </body>
 
     <script>
-      Dropzone.discover();
+        Dropzone.discover();
     </script>
 </html>
