@@ -1,0 +1,22 @@
+O pe is the huge opensounce Libnany for the computer Vision, machine
+asning, and
+
+image processing and now it plays a major role in real-time operation
+
+which is Very
+
+important in todays systems. By using it, one can process images and videos to
+
+identify
+
+objects, faces, ox even handwriting of a human, When it integrated with various
+
+Libnanies, such as Numpuy, python is capable of processing the OpenCV arnay
+
+structure
+
+for anakysis. To Identify image pattern and. its various featunes we use Vector
+
+space and
+
+perform mathematical openations on these peatures.
