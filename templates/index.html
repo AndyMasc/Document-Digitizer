@@ -6,7 +6,7 @@
 
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
         </style>
 
         <meta charset="UTF-8">
@@ -14,21 +14,16 @@
         <link rel="stylesheet" href="/static/main.css">
     </head>
     <body>
-    <h1> Digitize Your Documents </h1>
+        <h1> Digitize Your Documents </h1>
 
-    <form action = "/" class = "dropzone" id = "my-dropzone">
-        <img src = "/static/scannerIMG.png" alt = "scanner">
-        <div class="dz-message" data-dz-message> <span> Drop your document onto the scanner, or click this to choose </span> </div>
-    </form>
+        <form action = "/" class = "dropzone" id = "my-dropzone">
+            <img src = "/static/scannerIMG.png" alt = "scanner">
+            <div class="dz-message" data-dz-message> <span style="font-family:Noto Sans Mono; color:#4a2d24;"> Drop your document onto the scanner, or click this to choose </span> </div>
+        </form>
 
-    <div class="PageLinks">
-        <a href="{{ url_for('showOutputText') }}"> Click here to convert </a>
-    </div>
-
-    {% if text %}
-        <h2>Output text:</h2><br>
-        <div class = "output-box">{{ text }}</div>
-    {% endif %}
+        <div class="PageLinks">
+            <a href="{{ url_for('showOutputText') }}"> Click here to convert </a>
+        </div>
     </body>
 
     <script>

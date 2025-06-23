@@ -1,7 +1,7 @@
 h1 {
     text-align: center;
     font-size: 60px;
-    font-family: Limelight;
+    font-family: Noto Sans Mono;
     color: #4a2d24
 }
 
@@ -13,6 +13,12 @@ body {
     border: none;
     margin: auto;
     width: 30%;
+}
+
+.GitHubLogo {
+    position: absolute;
+    background-color: transparent;
+    width:5%;
 }
 
 img {
@@ -27,10 +33,19 @@ a {
   color: #dbbe9f;
   border-radius: 10px;
   text-align: center;
-  font-family: Annai MN;
+  font-family: Noto Sans Mono;
 }
 
 .PageLinks {
     text-align: center;
+      transition: all 0.4s ease;
+  transform: scale(1);
 }
 
+.PageLinks:hover {
+  transform: scale(1.2)
+}
+
+iframe {
+    width: 50%;
+}

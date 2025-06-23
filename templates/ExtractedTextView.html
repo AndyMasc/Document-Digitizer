@@ -4,7 +4,7 @@
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
 
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
         </style>
 
         <meta charset="UTF-8">
@@ -12,8 +12,8 @@
         <link rel="stylesheet" href="/static/main.css">
     </head>
     <body>
-    <h1> View Your Converted Document </h1>
+        <h1> View Your Converted Document </h1>
 
-    <iframe src="{{ url_for('static', filename='ExtractedText.txt') }}" title="Converted Text"></iframe>
+        <iframe src="{{ url_for('static', filename='ExtractedText.txt') }}" title="Converted Text"></iframe>
     </body>
 </html>
