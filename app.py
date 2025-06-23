@@ -12,6 +12,9 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+app.config['DROPZONE_ALLOWED_FILE_CUSTOM'] = True
+app.config['DROPZONE_ALLOWED_FILE_TYPE'] = 'image'
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     output = ''
@@ -21,7 +24,7 @@ def index():
         global target
         target = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(target)
-    return render_template('index.html', text=output)
+    return render_template('index.html')
 
 @app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
@@ -36,14 +39,18 @@ def convertImageToText():
     image = cv2.imread(target)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     text = pytesseract.image_to_string(image)
-    os.remove(target)
+    try:
+        os.remove(target)  # clean up
+    except FileNotFoundError:
+        pass
     return text
 
 def createPDF(content):
-    with open('ExtractedText.txt', 'w') as text:
+    filePath = os.path.join(app.static_folder, 'ExtractedText.txt')
+    with open(filePath, 'w') as text:
         text.write(content)
 
 dropzone = Dropzone(app)
 if __name__ == '__main__':
     target = ''
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
