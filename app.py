@@ -13,11 +13,13 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.config['DROPZONE_ALLOWED_FILE_CUSTOM'] = True
-app.config['DROPZONE_ALLOWED_FILE_TYPE'] = 'image'
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+def Homepage():
+    return render_template('HomePage.html')
+
+@app.route('/upload', methods=['GET', 'POST'])
 def index():
-    output = ''
     if request.method == 'POST':
         file = request.files.get('file')
         filename = secure_filename(file.filename)
@@ -29,7 +31,7 @@ def index():
 @app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
     if not os.path.isfile(target):
-        return redirect('/')
+        return redirect('/upload')
     outputText = convertImageToText()
     createPDF(outputText)
     return render_template('ExtractedTextView.html')
@@ -52,5 +54,6 @@ def createPDF(content):
 
 dropzone = Dropzone(app)
 if __name__ == '__main__':
+    error = ''
     target = ''
     app.run(host='0.0.0.0', debug=True)
