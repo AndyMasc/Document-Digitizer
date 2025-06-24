@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
-
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
         </style>
@@ -12,8 +11,7 @@
         <link rel="stylesheet" href="/static/main.css">
     </head>
     <body>
-        <h1> View Your Converted Document </h1>
-
-        <iframe src="{{ url_for('static', filename='ExtractedText.txt') }}" title="Converted Text"></iframe>
+        <h1> Your Document is Ready </h1>
+        <iframe src="{{ url_for('static', filename='ExtractedText.txt') }}" title="Converted Text"> </iframe>
     </body>
 </html>

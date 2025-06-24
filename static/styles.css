@@ -13,12 +13,25 @@ body {
     border: none;
     margin: auto;
     width: 30%;
+    height: 80%;
 }
 
-.GitHubLogo {
-    position: absolute;
-    background-color: transparent;
-    width:5%;
+.bobbingScanner {
+    animation: bobbing 1.3s linear infinite;
+}
+
+@keyframes bobbing {
+    0% {
+        transform: translateY(0px);
+        animation-timing-function: ease-out;
+    }
+    40% {
+        transform: translateY(20px);
+        animation-timing-function: ease-in;
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 img {
@@ -27,7 +40,8 @@ img {
 }
 
 a {
-  padding: 20px;
+  padding: 10px;
+  margin: 2%;
   text-decoration: none;
   background-color: #4a2d24;
   color: #dbbe9f;
@@ -38,14 +52,10 @@ a {
 
 .PageLinks {
     text-align: center;
-      transition: all 0.4s ease;
-  transform: scale(1);
+    transition: all 0.4s ease;
+    transform: scale(1);
 }
 
 .PageLinks:hover {
-  transform: scale(1.2)
-}
-
-iframe {
-    width: 50%;
+    transform: scale(1.1)
 }

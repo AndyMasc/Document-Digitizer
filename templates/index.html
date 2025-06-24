@@ -3,7 +3,6 @@
     <head>
         <script src= "https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"> </script>
         <link href= "https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel= "stylesheet" type= "text/css"/>
-
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
@@ -14,19 +13,24 @@
         <link rel="stylesheet" href="/static/main.css">
     </head>
     <body>
-        <h1> Digitize Your Documents </h1>
+    <h1> Scan <span style="color: DarkSlateGray;"> Your </span> Documents </h1>
 
-        <form action = "/" class = "dropzone" id = "my-dropzone">
-            <img src = "/static/scannerIMG.png" alt = "scanner">
-            <div class="dz-message" data-dz-message> <span style="font-family:Noto Sans Mono; color:#4a2d24;"> Drop your document onto the scanner, or click this to choose </span> </div>
+        <form action = "/upload" class = "dropzone" id = "my-dropzone">
+            <img src = "/static/scannerIMG.png" class = "bobbingScanner" alt = "scanner">
+            <div class="dz-message" data-dz-message> <span style="font-family:Noto Sans Mono; color:#4a2d24;"> Drop your document onto the scanner, or click here to upload </span> </div>
         </form>
 
         <div class="PageLinks">
-            <a href="{{ url_for('showOutputText') }}"> Click here to convert </a>
+            <a class="scanner" href="{{ url_for('showOutputText') }}"> Start Scanning Now </a>
+            <a class="home" href="{{ url_for('Homepage') }}"> Return to Home Page</a>
         </div>
     </body>
 
     <script>
+        Dropzone.options.myDropzone = {
+            maxFiles: 1,
+            acceptedFiles: ".jpg, .jpeg, .png",
+        };
         Dropzone.discover();
     </script>
 </html>
