@@ -25,6 +25,12 @@ This project is a web application built with Flask and Dropzone.js that allows u
 
 ---
 
+## AI
+
+AI was utilized to help make this project - although, mainly for debugging. It was utilized to debug why formatting of the original image "broke" when converted to a PDF and how to fix it. Also utilized to debug why the Pytesseract model was not being installed properly on my computer.
+
+---
+
 ## Installation
 
 1. **Clone the repository**
