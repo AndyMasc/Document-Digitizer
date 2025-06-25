@@ -8,20 +8,25 @@
     </style>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Landing page </title>
 
 </head>
 <body>
-    <div class="titleContainer">
-        <h1> Digitize Your <br> <span class="auto-type" style="color:DarkSlateGray"> </span> </h1>
+    <div class="container">
+        <div class="homeText">
+            <h1> Digitize Your <br> <span class="auto-type" style="color:DarkSlateGray"> </span> </h1>
+            <p> Convert your printed documents and physical media to digital files quickly. No account required, no ads, no hassle. Just upload and convert.</p>
+        </div>
     </div>
-    <p> Digitize printed documents and physical media quickly — no account <br> required, no hidden fees, no hassle. Just upload and convert.</p>
+
     <div class="coloredBar">
         <div class="pageLinks">
             <a href="{{ url_for('index') }}"> Scan a document now </a>
             <a href="https://github.com/AndyMasc/Document-Digitizer"> Collaborate on GitHub </a>
         </div>
     </div>
+
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
         var typed = new Typed('.auto-type', {
