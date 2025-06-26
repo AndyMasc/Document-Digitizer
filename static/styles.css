@@ -2,25 +2,38 @@ h1 {
     text-align: center;
     font-size: 4vw;
     font-family: Poppins;
-    color: #4a2d24
+    color:  #264653;
+}
+
+.returnLinks {
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
 }
 
 .outputContainer {
     display: flex;
     position: fixed;
+    top: 0;
     width: 100%;
-    height: 70%;
+    height: 100%;
     justify-content: center;
     align-items: center;
 }
 
 iframe {
     width: 80%;
-    height: 100%;
+    height: 60%;
 }
 
 body {
-    background-color: #dbbe9f;
+    background-color: #edf4ff;
 }
 
 .dropzone {
@@ -56,22 +69,22 @@ img {
 .PageLinks {
     display: flex;
     justify-content: center;
-    gap: 3vw; /* space between links */
+    gap: 3vw;
 }
 
-.PageLinks a {
+a {
     padding: 1.25vw;
     border-radius: 10px;
     font-family: Poppins;
     font-size: 1.25vw;
     text-decoration: none;
-    color: #dbbe9f;
-    background-color: #4a2d24;
+    color: #edf4ff;
+    background-color: #264653;
     transition: all 0.4s ease;
     transform: scale(1);
 }
 
-.PageLinks a:hover {
+a:hover {
     transform: scale(1.1);
-    background-color: #523931;
+    background-color: #244d75;
 }

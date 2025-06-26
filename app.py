@@ -14,8 +14,6 @@ app = Flask(__name__)
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-app.config['DROPZONE_ALLOWED_FILE_CUSTOM'] = True
-
 @app.route('/')
 def Homepage():
     return render_template('HomePage.html')
