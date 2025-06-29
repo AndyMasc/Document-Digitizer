@@ -1,10 +1,6 @@
-body {
-    background-color: #edf4ff;
-}
-
 .homeText h1 {
     margin-top: 0;
-    font-size: 100px;
+    font-size: 7vw;
     font-family: Poppins;
 }
 
@@ -42,14 +38,14 @@ body {
 .pageLinks {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 50px;
 }
 
 .pageLinks a {
     padding: 15px;
     border-radius: 10px;
     font-family: Poppins;
-    font-size: 20px;
+    font-size: 1.5vw;
     text-decoration: none;
     background-color: #edf4ff;
     color: #264653;
@@ -99,5 +95,9 @@ body {
     .pageLinks a {
         padding: 10px;
         font-size: 15px;
+    }
+
+    .pageLinks {
+        gap: 15px;
     }
 }
