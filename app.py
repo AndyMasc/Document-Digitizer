@@ -6,11 +6,18 @@ import pytesseract
 import cv2
 import re
 import os
+import shutil
 
-pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
+
+path = shutil.which("tesseract")
+if path:
+    pytesseract.pytesseract.tesseract_cmd = path
+else:
+    pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
 
 app = Flask(__name__)
 
+os.makedirs(app.static_folder, exist_ok=True)
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -50,7 +57,7 @@ def convertImageToText():
 def createPDF(content):
     pdf = FPDF()
     pdf.add_page()
-    pdf.add_font('DejaVu', '', '/Users/andymascarenhas/Library/Fonts/DejaVuSansCondensed.ttf', uni=True)
+    pdf.add_font('DejaVu', '', os.path.join('fonts', 'DejaVuSansCondensed.ttf'), uni=True)
     pdf.set_font('DejaVu', '', 12)
     if not content:
         pdf.cell(0, 10, "No text could be extracted.")
