@@ -12,6 +12,7 @@ fonttools==4.58.4
 fpdf==1.7.2
 fpdf2==2.8.3
 fsspec==2025.5.1
+gunicorn==23.0.0
 imageio==2.37.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
