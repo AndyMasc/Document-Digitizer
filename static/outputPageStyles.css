@@ -1,8 +1,24 @@
+.TitleText {
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    height: 15%;
+    background-color: #264653;
+    color: #edf4ff;
+}
+
+.TitleText h1 {
+    text-align: center;
+    font-size: 60px;
+    font-family: Poppins;
+}
+
 .returnLinks {
     display: flex;
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
     height: 20%;
     justify-content: center;
@@ -13,29 +29,34 @@
 .outputContainer {
     display: flex;
     position: fixed;
-    top: 0;
+    flex-direction: column;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 85%;
     justify-content: center;
     align-items: center;
+    gap: 30px;
 }
 
 iframe {
     width: 80%;
-    height: 60%;
+    height: 80%;
 }
 
 .PageLinks {
     display: flex;
+    width: 100%;
     justify-content: center;
-    gap: 3vw;
+    align-items: center;
+    gap: 10px;
 }
 
-a {
-    padding: 1.25vw;
+.PageLinks a {
+    padding: 10px;
     border-radius: 10px;
     font-family: Poppins;
-    font-size: 1.25vw;
+    font-size: 1.5vw;
     text-decoration: none;
     color: #edf4ff;
     background-color: #264653;
@@ -43,7 +64,17 @@ a {
     transform: scale(1);
 }
 
-a:hover {
+.PageLinks a:hover {
     transform: scale(1.1);
     background-color: #244d75;
+}
+
+@media (max-width: 600px) {
+    .TitleText h1 {
+        font-size: 30px;
+    }
+
+    .PageLinks a {
+        font-size: 12px;
+    }
 }

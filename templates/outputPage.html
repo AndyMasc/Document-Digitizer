@@ -9,17 +9,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> View Extracted Text </title>
-        <link rel="stylesheet" href="/static/OutputView.css">
+        <link rel="stylesheet" href="/static/OutputPageStyles.css">
     </head>
     <body>
-        <h1> Your Document is Ready </h1>
+        <div class="TitleText"> <h1> Your Document is Ready </h1> </div>
         <div class="outputContainer">
             <iframe src="{{ url_for('static', filename='ExtractedText.pdf') }}" title="Converted Text"> </iframe>
-        </div>
-        <div class="returnLinks">
-            <a href="{{ url_for('index') }}"> Scan Another </a>
-            <a href="{{ url_for('Homepage') }}"> Return Home </a>
-            <a href="https://github.com/AndyMasc/Document-Digitizer"> Star on GitHub </a>
+            <div class="PageLinks">
+                <a href="{{ url_for('uploadPage') }}"> Scan Another </a>
+                <a href="{{ url_for('index') }}"> Return Home </a>
+                <a href="https://github.com/AndyMasc/Document-Digitizer"> Star on GitHub </a>
+            </div>
         </div>
     </body>
 </html>
