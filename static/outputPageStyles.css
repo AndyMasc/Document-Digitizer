@@ -1,10 +1,3 @@
-h1 {
-    text-align: center;
-    font-size: 4vw;
-    font-family: Poppins;
-    color:  #264653;
-}
-
 .returnLinks {
     display: flex;
     position: fixed;
@@ -30,40 +23,6 @@ h1 {
 iframe {
     width: 80%;
     height: 60%;
-}
-
-body {
-    background-color: #edf4ff;
-}
-
-.dropzone {
-    border: none;
-    margin: auto;
-    width: 30%;
-    height: 80%;
-}
-
-.bobbingScanner {
-    animation: bobbing 1.3s linear infinite;
-}
-
-@keyframes bobbing {
-    0% {
-        transform: translateY(0px);
-        animation-timing-function: ease-out;
-    }
-    50% {
-        transform: translateY(20px);
-        animation-timing-function: ease-in;
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-img {
-    width: 100%;
-    margin: auto;
 }
 
 .PageLinks {

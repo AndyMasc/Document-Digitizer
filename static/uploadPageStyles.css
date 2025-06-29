@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+    font-family: 'Poppins';
+    background-color: #edf4ff;
+    color: #264653;
+}
+
+.TitleText {
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    height: 15%;
+    background-color: #264653;
+    color: #edf4ff;
+}
+
+.TitleText h1 {
+    text-align: center;
+    font-size: 60px;
+}
+
+.uploadContainer {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    height: 85%;
+    width: 100%;
+    border: solid;
+    left: 0;
+}
+
+.uploadScanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadScanner img {
+    width: 100%;
+}
+
+.dropzone {
+    width: 30%;
+    transition: background-color 0.3s ease;
+}
+
+.dropzone:hover {
+    background-color: rgba(230, 244, 255, 0.9);
+}
