@@ -6,15 +6,12 @@ import pytesseract
 import cv2
 import re
 import os
-import shutil
+import platform
 
-
-path = shutil.which("tesseract")
-if path:
-    pytesseract.pytesseract.tesseract_cmd = path
+if platform.system() == "Darwin":
+    pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
 else:
-    pytesseract.pytesseract.tesseract_cmd = '/opt/homebrew/bin/tesseract'
-
+    pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 app = Flask(__name__)
 
 os.makedirs(app.static_folder, exist_ok=True)
@@ -37,6 +34,7 @@ def uploadPage():
 
 @app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
+    global target
     if not os.path.isfile(target):
         return redirect('/upload')
     outputText = convertImageToText()
