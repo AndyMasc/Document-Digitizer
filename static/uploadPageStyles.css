@@ -26,6 +26,7 @@ html, body {
 .uploadContainer {
     position: fixed;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     bottom: 0;
@@ -33,6 +34,7 @@ html, body {
     width: 100%;
     border: solid;
     left: 0;
+    gap: 25px;
 }
 
 .uploadScanner {
@@ -43,13 +45,91 @@ html, body {
 
 .uploadScanner img {
     width: 100%;
+    animation: bobbing 1.5s linear infinite;
+}
+
+@keyframes bobbing {
+    0% {
+        transform: translateY(0px);
+        animation-timing-function: ease-out;
+    }
+    50% {
+        transform: translateY(20px);
+        animation-timing-function: ease-in;
+    }
+    100% {
+        transform: translateY(0px);
+        animation-timing-function: ease-out
+    }
+
 }
 
 .dropzone {
     width: 30%;
+    background-color: white;
+    border: dashed;
     transition: background-color 0.3s ease;
 }
 
 .dropzone:hover {
-    background-color: rgba(230, 244, 255, 0.9);
+    background-color: #f0f0f0;
+}
+
+.PageLinks {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.PageLinks a {
+    padding: 10px;
+    border-radius: 10px;
+    font-family: Poppins;
+    font-size: 1.25vw;
+    text-decoration: none;
+    color: #edf4ff;
+    background-color: #264653;
+    transition: all 0.4s ease;
+    transform: scale(1);
+}
+
+.PageLinks a:hover {
+    transform: scale(1.1);
+    background-color: #244d75;
+}
+
+@media (max-width: 1024px) and (min-height: 1000px) {
+    .dropzone {
+        width: 70%;
+    }
+
+    .dz-message {
+        font-size: 20px;
+    }
+
+    .PageLinks a {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .TitleText h1 {
+        font-size: 30px;
+    }
+
+    .uploadScanner img {
+        width: 70%;
+    }
+
+    .dropzone {
+        width: 80%;
+        height: 70%;
+        border: solid;
+    }
+
+    .PageLinks a {
+        font-size: 15px;
+    }
 }
