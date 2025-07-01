@@ -17,6 +17,10 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = tmp_path
 client = vision.ImageAnnotatorClient()
 
 os.makedirs(app.static_folder, exist_ok=True)
+
+if not os.path.exists(os.path.join(os.getcwd(), 'uploads')):
+    os.makedirs(os.path.join(os.getcwd(), 'uploads'))
+
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
