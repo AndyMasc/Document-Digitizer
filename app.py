@@ -2,15 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask_dropzone import Dropzone
 from fpdf import FPDF
-import os, json
-from google.cloud import vision
-from google.oauth2 import service_account
+import os
 
 app = Flask(__name__)
 
-creds_json = os.environ["CloudVisionAPI"]
-creds_info = json.loads(creds_json)
-credentials = service_account.Credentials.from_service_account_info(creds_info)
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.environ.get("CloudVisionAPI")
+
 client = vision.ImageAnnotatorClient()
 
 os.makedirs(app.static_folder, exist_ok=True)
