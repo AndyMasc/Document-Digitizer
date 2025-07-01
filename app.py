@@ -7,7 +7,12 @@ from google.cloud import vision
 
 app = Flask(__name__)
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.environ.get("CloudVisionAPI")
+creds_json = os.environ["CloudVisionAPI"]
+tmp_path = "/tmp/google_creds.json"
+with open(tmp_path, "w") as f:
+    f.write(creds_json)
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = tmp_path
 
 client = vision.ImageAnnotatorClient()
 
