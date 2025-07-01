@@ -2,12 +2,20 @@ from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask_dropzone import Dropzone
 from fpdf import FPDF
-import os
+import os, tempfile
 from google.cloud import vision
 
 app = Flask(__name__)
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.environ.get('CloudVisionAPI')
+json_str = os.environ.get('CloudVisionAPI')
+
+if not json_str:
+    raise RuntimeError("CloudVisionAPI env var not set!")
+
+with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+    f.write(json_str)
+    f.flush()
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = f.name
 
 os.makedirs(app.static_folder, exist_ok=True)
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
