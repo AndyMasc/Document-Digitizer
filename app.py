@@ -2,17 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask_dropzone import Dropzone
 from fpdf import FPDF
-import pytesseract
-import cv2
-import re
 import os
-import platform
+from google.cloud import vision
 
-if platform.system() == "Darwin":
-    pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
-else:
-    pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 app = Flask(__name__)
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.environ.get('CloudVisionAPI')
 
 os.makedirs(app.static_folder, exist_ok=True)
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
@@ -43,14 +38,20 @@ def showOutputText():
 
 def convertImageToText():
     global target
-    image = cv2.imread(target)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    text = pytesseract.image_to_string(image)
-    try:
-        os.remove(target)
-    except FileNotFoundError:
-        pass
-    return text
+    client = vision.ImageAnnotatorClient()
+
+    with open(target, 'rb') as image_file:
+        content = image_file.read()
+
+    image = vision.Image(content=content)
+    response = client.document_text_detection(image=image)  # Use document_text_detection for handwriting
+    texts = response.text_annotations
+    result = ''
+    for text in texts:
+        result = result + ("{}".format(text.description))
+    result = texts[0].description
+    os.remove(target)
+    return result
 
 def createPDF(content):
     pdf = FPDF()
@@ -59,15 +60,8 @@ def createPDF(content):
     pdf.set_font('DejaVu', '', 12)
     if not content:
         pdf.cell(0, 10, "No text could be extracted.")
-
-    content = content.replace('\r\n', '\n').replace('\r', '\n')
-    content = re.sub(r'\n{2,}', '<<<P>>>', content)
-    content = content.replace('\n', ' ')
-    content = content.replace('<<<P>>>', '\n\n')
-    for paragraph in content.split('\n\n'):
-        paragraph = paragraph.strip()
-        if paragraph:
-            pdf.multi_cell(0, 10, paragraph)
+    else:
+        pdf.multi_cell(0, 10, content)
 
     filePath = os.path.join(app.static_folder, 'ExtractedText.pdf')
     pdf.output(filePath)
