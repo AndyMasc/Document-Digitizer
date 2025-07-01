@@ -13,7 +13,7 @@
 
 .TitleText h1 {
     text-align: center;
-    font-size: 60px;
+    font-size: 5vw;
     font-family: Poppins;
 }
 
@@ -49,14 +49,14 @@ iframe {
     width: 100%;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 1vw;
 }
 
 .PageLinks a {
-    padding: 10px;
-    border-radius: 10px;
+    padding: 1vw;
+    border-radius: 1vw;
     font-family: Poppins;
-    font-size: 1.5vw;
+    font-size: 1.25vw;
     text-decoration: none;
     color: #edf4ff;
     background-color: #264653;
