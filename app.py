@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask_dropzone import Dropzone
 from fpdf import FPDF
 import os
+from google.cloud import vision
 
 app = Flask(__name__)
 
