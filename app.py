@@ -2,20 +2,16 @@ from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask_dropzone import Dropzone
 from fpdf import FPDF
-import os, tempfile
+import os, json
 from google.cloud import vision
+from google.oauth2 import service_account
 
 app = Flask(__name__)
 
-json_str = os.environ.get('CloudVisionAPI')
-
-if not json_str:
-    raise RuntimeError("CloudVisionAPI env var not set!")
-
-with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
-    f.write(json_str)
-    f.flush()
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = f.name
+creds_json = os.environ["CloudVisionAPI"]
+creds_info = json.loads(creds_json)
+credentials = service_account.Credentials.from_service_account_info(creds_info)
+client = vision.ImageAnnotatorClient()
 
 os.makedirs(app.static_folder, exist_ok=True)
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
@@ -46,7 +42,6 @@ def showOutputText():
 
 def convertImageToText():
     global target
-    client = vision.ImageAnnotatorClient()
 
     with open(target, 'rb') as image_file:
         content = image_file.read()
