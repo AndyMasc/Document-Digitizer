@@ -49,6 +49,8 @@ def showOutputText():
 
 def convertImageToText():
     global target
+    if not os.path.isfile(target):
+        return redirect('/upload')
 
     with open(target, 'rb') as image_file:
         content = image_file.read()
