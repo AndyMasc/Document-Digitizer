@@ -53,6 +53,7 @@ def convertImageToText():
 
 @app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
+    global target
     if not os.path.isfile(target):
         return redirect('/upload')
     outputText = convertImageToText()
