@@ -6,9 +6,7 @@ This project is a web application built with Flask and Dropzone.js that allows u
 
 # Demo
 
-To demo this project, visit the url:
- https://blind-eran-andymasc-b9d76a9d.koyeb.app/
-
+To demo this project, visit the url: https://digitit.koyeb.app/
 ---
 
 ## Features
