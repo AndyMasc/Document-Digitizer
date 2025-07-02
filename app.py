@@ -30,6 +30,8 @@ def index():
 def uploadPage():
     if request.method == 'POST':
         file = request.files.get('file')
+        if not file or file.filename == '':
+            return redirect(url_for('uploadPage'))
         filename = secure_filename(file.filename)
         global target
         target = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -52,8 +54,6 @@ def convertImageToText():
 @app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
     global target
-    if not os.path.isfile(target):
-        return redirect('/upload')
     outputText = convertImageToText()
     createPDF(outputText)
     os.remove(target)
@@ -68,7 +68,6 @@ def createPDF(content):
         pdf.cell(0, 10, "No text could be extracted.")
     else:
         pdf.multi_cell(0, 10, content)
-
     filePath = os.path.join(app.static_folder, 'ExtractedText.pdf')
     pdf.output(filePath)
 
