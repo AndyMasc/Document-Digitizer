@@ -23,11 +23,9 @@ To demo this project, visit the url:
 
 ## Technologies Used
 
-- Python 3.x
-- Flask (web framework)
-- Flask-Dropzone (Dropzone.js integration for Flask)
-- OpenCV (image processing)
-- Tesseract OCR (text extraction)
+- Python 3.13
+- Flask
+- cloud vision OCR (text extraction)
 - HTML, CSS, JavaScript (frontend)
 
 ---
