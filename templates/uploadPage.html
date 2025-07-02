@@ -15,7 +15,7 @@
     <body>
         <div class="TitleText"> <h1> Scan Your Documents </h1> </div>
         <div class="uploadContainer">
-            <form action = "/upload" class = "dropzone" id = "my-dropzone">
+            <form action="/upload" method="POST" class="dropzone" id="my-dropzone">
                 <div class="uploadScanner"> <img src="/static/scannerIMG.png" alt="scanner"> </div>
                 <div class="dz-message" data-dz-message> <span style="font-family:Poppins;"> To proceed, drop your document onto the scanner, or <b>click here</b> to upload. </span> </div>
             </form>
@@ -30,7 +30,7 @@
         Dropzone.options.myDropzone = {
             maxFiles: 1,
             acceptedFiles: ".jpg, .jpeg, .png",
-        };
+        }
         Dropzone.discover();
     </script>
 </html>

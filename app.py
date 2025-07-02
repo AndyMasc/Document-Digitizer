@@ -31,7 +31,7 @@ def uploadPage():
     if request.method == 'POST':
         file = request.files.get('file')
         if not file or file.filename == '':
-            return redirect(url_for('uploadPage'))
+            return '', 204
         filename = secure_filename(file.filename)
         global target
         target = os.path.join(app.config['UPLOAD_FOLDER'], filename)
