@@ -126,7 +126,6 @@ html, body {
     .dropzone {
         width: 80%;
         height: 70%;
-        border: solid;
     }
 
     .PageLinks a {
