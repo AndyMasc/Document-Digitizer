@@ -13,14 +13,12 @@ with open(tmp_path, "w") as f:
     f.write(creds_json)
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = tmp_path
-
 client = vision.ImageAnnotatorClient()
 
 os.makedirs(app.static_folder, exist_ok=True)
 
 if not os.path.exists(os.path.join(os.getcwd(), 'uploads')):
     os.makedirs(os.path.join(os.getcwd(), 'uploads'))
-
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -38,23 +36,11 @@ def uploadPage():
         file.save(target)
     return render_template('uploadPage.html')
 
-@app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
-def showOutputText():
-    global target
-    if not os.path.isfile(target):
-        return redirect('/upload')
-    outputText = convertImageToText()
-    createPDF(outputText)
-    return render_template('outputPage.html')
 
 def convertImageToText():
     global target
-    if not os.path.isfile(target):
-        return redirect('/upload')
-
     with open(target, 'rb') as image_file:
         content = image_file.read()
-
     image = vision.Image(content=content)
     response = client.document_text_detection(image=image)  # Use document_text_detection for handwriting
     texts = response.text_annotations
@@ -64,6 +50,14 @@ def convertImageToText():
     result = texts[0].description
     os.remove(target)
     return result
+
+@app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
+def showOutputText():
+    if not os.path.isfile(target):
+        return redirect('/upload')
+    outputText = convertImageToText()
+    createPDF(outputText)
+    return render_template('outputPage.html')
 
 def createPDF(content):
     pdf = FPDF()
