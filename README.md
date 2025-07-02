@@ -1,6 +1,13 @@
 # OCR Image Uploader with Flask and Dropzone
 
-This project is a web application built with Flask and Dropzone.js that allows users to upload images via drag-and-drop, processes the images with OCR (Optical Character Recognition) using Tesseract, and extracts text content from the images.
+This project is a web application built with Flask and Dropzone.js that allows users to upload images of their handwriting or documents via drag-and-drop or file selector, processes the images with OCR (Optical Character Recognition) using cloud vision, and extracts text content from the images making it a PDF.
+
+---
+
+# Demo
+
+To demo this project, visit the url:
+ https://blind-eran-andymasc-b9d76a9d.koyeb.app/
 
 ---
 
@@ -27,7 +34,7 @@ This project is a web application built with Flask and Dropzone.js that allows u
 
 ## AI
 
-AI was utilized to help make this project - although, mainly for debugging. It was utilized to debug why formatting of the original image "broke" when converted to a PDF and how to fix it. Also utilized to debug why the Pytesseract model was not being installed properly on my computer.
+AI was utilized to help make this project - although, for debugging. It was utilized to debug why formatting of the original image "broke" when converted to a PDF and how to fix it. Also utilized to debug why the Pytesseract model was not being installed properly on my computer, and created the scanner image on the upload page.
 
 ---
 
