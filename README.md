@@ -35,20 +35,3 @@ To demo this project, visit the url:
 AI was utilized to help make this project - although, for debugging. It was utilized to debug why formatting of the original image "broke" when converted to a PDF and how to fix it. Also utilized to debug why the Pytesseract model was not being installed properly on my computer, and created the scanner image on the upload page.
 
 ---
-
-## Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yourusername/ocr-image-uploader.git
-   cd ocr-image-uploader
-
-2.  **Create and activate venv
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate   # macOS/Linux
-   venv\Scripts\activate      # Windows
-
-3. Install tesseract and pytesseract
-
