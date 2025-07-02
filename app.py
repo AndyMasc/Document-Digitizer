@@ -79,4 +79,4 @@ def createPDF(content):
 dropzone = Dropzone(app)
 if __name__ == '__main__':
     target = ''
-    app.run(debug=True)
+    app.run()
