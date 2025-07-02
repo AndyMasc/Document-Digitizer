@@ -5,8 +5,8 @@
 }
 
 .homeText p {
-    font-size: 1.5vw;
-    font-family: Poppins;
+    font-size: 21px;
+    font-family: poppins;
     font-weight: 500;
 }
 
@@ -42,8 +42,8 @@
 }
 
 .pageLinks a {
-    padding: 1vw;
-    border-radius: 1vw;
+    padding: 15px;
+    border-radius: 10px;
     font-family: Poppins;
     font-size: 1.5vw;
     text-decoration: none;

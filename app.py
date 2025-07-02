@@ -4,10 +4,8 @@ from flask_dropzone import Dropzone
 from fpdf import FPDF
 import os
 from google.cloud import vision
-from whitenoise import WhiteNoise
 
-app = Flask(__name__, static_url_path='/static', static_folder='static')
-app.wsgi_app = WhiteNoise(app.wsgi_app, root='static/')
+app = Flask(__name__)
 
 creds_json = os.environ["CloudVisionAPI"]
 tmp_path = "/tmp/google_creds.json"
@@ -81,4 +79,4 @@ def createPDF(content):
 dropzone = Dropzone(app)
 if __name__ == '__main__':
     target = ''
-    app.run()
+    app.run(debug=True)
