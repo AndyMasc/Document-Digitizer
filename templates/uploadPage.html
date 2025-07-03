@@ -15,11 +15,12 @@
     <body>
         <div class="TitleText"> <h1> Scan Your Documents </h1> </div>
         <div class="uploadContainer">
-            <form action="/upload" method="POST" class="dropzone" id="my-dropzone">
+            <form action = "/upload" class = "dropzone" id = "my-dropzone">
                 <div class="uploadScanner"> <img src="/static/scannerIMG.png" alt="scanner"> </div>
                 <div class="dz-message" data-dz-message> <span style="font-family:Poppins;"> To proceed, drop your document onto the scanner, or <b>click here</b> to upload. </span> </div>
             </form>
             <div class="PageLinks">
+                <a class="scanner" href="{{ url_for('showOutputText') }}"> Start Scanning Now </a>
                 <a class="home" href="{{ url_for('index') }}"> Return to Home Page</a>
             </div>
         </div>
@@ -29,10 +30,7 @@
         Dropzone.options.myDropzone = {
             maxFiles: 1,
             acceptedFiles: ".jpg, .jpeg, .png",
-            success: function(file, response) {
-                window.location.href = response.redirect;
-            }
-        }
+        };
         Dropzone.discover();
     </script>
 </html>

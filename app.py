@@ -34,7 +34,6 @@ def uploadPage():
         global imageFilePath
         imageFilePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(imageFilePath)
-        return jsonify({"redirect": url_for('showOutputText')})
     return render_template('uploadPage.html')
 
 def convertImageToText():
