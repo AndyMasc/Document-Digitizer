@@ -20,10 +20,12 @@
                 <div class="dz-message" data-dz-message> <span style="font-family:Poppins;"> To proceed, drop your document onto the scanner, or <b>click here</b> to upload. </span> </div>
             </form>
             <div class="PageLinks">
-                <a class="scanner" href="{{ url_for('showOutputText') }}"> Start Scanning Now </a>
                 <a class="home" href="{{ url_for('index') }}"> Return to Home Page</a>
             </div>
         </div>
+        {% if alert %}
+            <div class="MissingFileAlert"> <h1> You have not uploaded any files. Please upload a file to proceed </h1> </div>
+        {% endif %}
     </body>
 
     <script>

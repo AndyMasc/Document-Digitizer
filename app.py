@@ -19,8 +19,8 @@ os.makedirs(app.static_folder, exist_ok=True)
 
 if not os.path.exists(os.path.join(os.getcwd(), 'uploads')):
     os.makedirs(os.path.join(os.getcwd(), 'uploads'))
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
 
 @app.route('/')
 def index():
@@ -29,18 +29,17 @@ def index():
 @app.route('/upload', methods=['GET', 'POST'])
 def uploadPage():
     if request.method == 'POST':
-        file = request.files.get('file')
-        if not file or file.filename == '':
-            return '', 204
+        file = request.files['file']
         filename = secure_filename(file.filename)
-        global target
-        target = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(target)
+        global imageFilePath
+        imageFilePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(imageFilePath)
+        return redirect(url_for('showOutputText'))
     return render_template('uploadPage.html')
 
 def convertImageToText():
-    global target
-    with open(target, 'rb') as image_file:
+    global imageFilePath
+    with open(imageFilePath, 'rb') as image_file:
         content = image_file.read()
     image = vision.Image(content=content)
     response = client.document_text_detection(image=image)  # Use document_text_detection for handwriting
@@ -53,25 +52,24 @@ def convertImageToText():
 
 @app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
-    global target
     outputText = convertImageToText()
     createPDF(outputText)
-    os.remove(target)
+    os.remove(imageFilePath)
     return render_template('outputPage.html')
 
-def createPDF(content):
+def createPDF(extractedText):
     pdf = FPDF()
     pdf.add_page()
     pdf.add_font('DejaVu', '', os.path.join('fonts', 'DejaVuSansCondensed.ttf'), uni=True)
     pdf.set_font('DejaVu', '', 12)
-    if not content:
+    if not extractedText:
         pdf.cell(0, 10, "No text could be extracted.")
     else:
-        pdf.multi_cell(0, 10, content)
-    filePath = os.path.join(app.static_folder, 'ExtractedText.pdf')
-    pdf.output(filePath)
+        pdf.multi_cell(0, 10, extractedText)
+    pdfFilePath = os.path.join(app.static_folder, 'ExtractedText.pdf')
+    pdf.output(pdfFilePath)
 
 dropzone = Dropzone(app)
 if __name__ == '__main__':
-    target = ''
+    imageFilePath = ''
     app.run()
