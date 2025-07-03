@@ -23,15 +23,15 @@
                 <a class="home" href="{{ url_for('index') }}"> Return to Home Page</a>
             </div>
         </div>
-        {% if alert %}
-            <div class="MissingFileAlert"> <h1> You have not uploaded any files. Please upload a file to proceed </h1> </div>
-        {% endif %}
     </body>
 
     <script>
         Dropzone.options.myDropzone = {
             maxFiles: 1,
             acceptedFiles: ".jpg, .jpeg, .png",
+            success: function(file, response) {
+                window.location.href = response.redirect;
+            }
         }
         Dropzone.discover();
     </script>

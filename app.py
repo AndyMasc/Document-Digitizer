@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
 from flask_dropzone import Dropzone
 from fpdf import FPDF
@@ -34,7 +34,7 @@ def uploadPage():
         global imageFilePath
         imageFilePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(imageFilePath)
-        return redirect(url_for('showOutputText'))
+        return jsonify({"redirect": url_for('showOutputText')})
     return render_template('uploadPage.html')
 
 def convertImageToText():
