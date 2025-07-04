@@ -15,12 +15,24 @@ with open(tmp_path, "w") as f:
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = tmp_path
 client = vision.ImageAnnotatorClient()
 
+# Create static folder for CSS and images if not already existing.
 os.makedirs(app.static_folder, exist_ok=True)
 
-if not os.path.exists(os.path.join(os.getcwd(), 'uploads')):
+# Create uploads folder for uploaded file if not already existing
+if not os.path.exists(os.path.abspath(os.path.dirname(__file__), 'uploads')):
     os.makedirs(os.path.join(os.getcwd(), 'uploads'))
 
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
+app.config.update(
+    UPLOADED_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads'),
+    DROPZONE_MAX_FILES = 1,
+    DROPZONE_MAX_FILE_SIZE = 20,
+    DROPZONE_ALLOWED_FILE_CUSTOM = True,
+    DROPZONE_ALLOWED_FILE_TYPE = '.jpg, .jpeg, .png',
+    DROPZONE_DEFAULT_MESSAGE = 'To proceed, drop your document onto the scanner, or <b>click here</b> to upload.',
+    DROPZONE_REDIRECT_VIEW = 'showOutputText',
+)
+
+dropzone = Dropzone(app)
 
 @app.route('/')
 def index():
@@ -28,11 +40,11 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def uploadPage():
-    if request.method == 'POST':
+    if request.method == 'POST' and 'file' in request.files:
         file = request.files['file']
         filename = secure_filename(file.filename)
         global imageFilePath
-        imageFilePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        imageFilePath = os.path.join(app.config['UPLOADED_PATH'], filename)
         file.save(imageFilePath)
     return render_template('uploadPage.html')
 
@@ -68,7 +80,6 @@ def createPDF(extractedText):
     pdfFilePath = os.path.join(app.static_folder, 'ExtractedText.pdf')
     pdf.output(pdfFilePath)
 
-dropzone = Dropzone(app)
 if __name__ == '__main__':
     imageFilePath = ''
     app.run()
