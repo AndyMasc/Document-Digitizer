@@ -29,7 +29,7 @@ app.config.update(
     DROPZONE_MAX_FILE_SIZE = 20,
     DROPZONE_ALLOWED_FILE_CUSTOM = True,
     DROPZONE_ALLOWED_FILE_TYPE = '.jpg, .jpeg, .png',
-    DROPZONE_DEFAULT_MESSAGE = 'To proceed, drop your image onto the scanner, or <b>click here</b> to upload.',
+    DROPZONE_DEFAULT_MESSAGE = 'Drop your image onto the scanner, or <b>click here</b> to upload. You will automatically be redirected',
     DROPZONE_REDIRECT_VIEW = 'showOutputText',
 )
 
