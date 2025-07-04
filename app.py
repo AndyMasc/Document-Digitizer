@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask_dropzone import Dropzone
 from fpdf import FPDF
@@ -51,7 +51,7 @@ def uploadPage():
 
 def convertImageToText():
     global imageFilePath
-    with open(imageFilePath, 'rb') as image_file:
+    with open(imageFilePath, 'r') as image_file:
         content = image_file.read()
     image = vision.Image(content=content)
     response = client.document_text_detection(image=image)  # Use document_text_detection for handwriting
