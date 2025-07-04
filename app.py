@@ -18,12 +18,13 @@ client = vision.ImageAnnotatorClient()
 # Create static folder for CSS and images if not already existing.
 os.makedirs(app.static_folder, exist_ok=True)
 
+absPath = os.path.join(os.path.abspath(os.path.dirname(__file__)))
 # Create uploads folder for uploaded file if not already existing
-if not os.path.exists(os.path.join(os.path.abspath(os.path.dirname(__file__), 'uploads'))):
+if not os.path.exists(absPath, 'uploads'):
     os.makedirs(os.path.join(os.getcwd(), 'uploads'))
 
 app.config.update(
-    UPLOADED_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'uploads'),
+    UPLOADED_PATH = os.path.join(absPath, 'uploads'),
     DROPZONE_MAX_FILES = 1,
     DROPZONE_MAX_FILE_SIZE = 20,
     DROPZONE_ALLOWED_FILE_CUSTOM = True,
