@@ -19,7 +19,7 @@ client = vision.ImageAnnotatorClient()
 os.makedirs(app.static_folder, exist_ok=True)
 
 # Create uploads folder for uploaded file if not already existing
-if not os.path.exists(os.path.abspath(os.path.dirname(__file__), 'uploads')):
+if not os.path.exists(os.path.join(os.path.abspath(os.path.dirname(__file__), 'uploads'))):
     os.makedirs(os.path.join(os.getcwd(), 'uploads'))
 
 app.config.update(
