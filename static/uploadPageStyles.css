@@ -35,6 +35,7 @@ html, body {
     border: solid;
     left: 0;
     gap: 25px;
+    z-index: 1;
 }
 
 .uploadScanner {
