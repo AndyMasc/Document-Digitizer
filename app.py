@@ -59,8 +59,9 @@ def convertImageToText():
     result = ''
     for text in texts:
         result = result + ("{}".format(text.description))
-    result = texts[0].description
-    return result
+    if not texts:
+        return "No text found in this image. Please try another image with text."
+    return texts[0].description
 
 @app.route('/ViewOutputText')  # By default, dropzone consumes POST response from server to know if upload succeeded. To actually see the rendered template, there has to be another flask endpoint or URL and a way to navigate to that.
 def showOutputText():
